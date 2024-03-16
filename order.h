@@ -1,16 +1,40 @@
-#include <iostream>
-
+#include <string>
+#include "statusCodes.h"
 class order
 {
     std::string name;
     std::string surname;
-    // date
+    std::string date; // zmienić na jakąś klasę ??
     // std::ctime ?
     std::vector<std::string> productList;
-    int statusCode;
+    int statusCode = ORDER_PLACED;
     std::string shipmentAddress;
 
 public:
+    // full constructor
+    order(
+        std::string name,
+        std::string surname,
+        std::string date,
+        std::vector<std::string> productList,
+        int statusCode,
+        std::string shipmentAddress);
+
+    // default statusCode
+    order(
+        std::string name,
+        std::string surname,
+        std::string date,
+        std::vector<std::string> productList,
+        std::string shipmentAddress);
+
+    // minimum(should this be even accessible to users?)
+    order(
+        std::string name,
+        std::string surname,
+        std::string date,
+        std::string shipmentAddress);
+
     void setName(std::string newName);
     std::string getName() const;
 
@@ -28,4 +52,4 @@ public:
 
     void setShipmentAddress(std::string shipmentAddress);
     std::string getShipmentAddress() const;
-}
+};
