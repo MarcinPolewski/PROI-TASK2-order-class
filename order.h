@@ -6,7 +6,7 @@ class order
     std::string surname;
     std::string date; // zmienić na jakąś klasę ??
     // std::ctime ?
-    std::vector<std::string> productList;
+    std::vector<std::string> productList = std::vector<std::string>(1);
     int statusCode = ORDER_PLACED;
     std::string shipmentAddress;
 

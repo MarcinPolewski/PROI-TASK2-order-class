@@ -2,9 +2,53 @@
 #include "statusCodes.h"
 
 // constructors
+order::order(
+    std::string name,
+    std::string surname,
+    std::string date,
+    std::vector<std::string> productList,
+    int statusCode,
+    std::string shipmentAddress)
+{
+    this->name = name;
+    this->surname = surname;
+    this->date = date;
+    this->productList = productList;
+    this->statusCode = statusCode;
+    this->shipmentAddress = shipmentAddress;
+}
+
+order::order(
+    std::string name,
+    std::string surname,
+    std::string date,
+    std::vector<std::string> productList,
+    std::string shipmentAddress)
+{
+    this->name = name;
+    this->surname = surname;
+    this->date = date;
+    this->productList = productList;
+    this->shipmentAddress = shipmentAddress;
+}
+
+order::order(
+    std::string name,
+    std::string surname,
+    std::string date,
+    std::vector<std::string> productList,
+    std::string shipmentAddress)
+{
+    this->name = name;
+    this->surname = surname;
+    this->date = date;
+    this->shipmentAddress = shipmentAddress;
+}
 
 // getters and setters
-void order::setName(std::string newName) {}
+void order::setName(std::string newName)
+{
+}
 std::string order::getName() const { return name; }
 
 void order::setSurname(std::string newSurname) {}
