@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "order.h"
 #include "date.h"
+#include "statusCodes.h"
 
 // testing date class
 
@@ -96,12 +97,114 @@ TEST(date, date_getDateStr)
 // testing order class
 TEST(order, order_init_and_getters_1)
 {
-    order a = order("aa", "bb", "cc", "dd");
-    ASSERT_EQ(a.getName(), "aa");
-    ASSERT_EQ(a.getSurname(), "bb");
-}
+    date d = date(31, 12, 2012);
+    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
 
+    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
+    ASSERT_EQ(a.getName(), "name");
+    ASSERT_EQ(a.getSurname(), "surname");
+
+    date storedDate = a.getDate();
+    ASSERT_EQ(storedDate.getDay(), 31);
+    ASSERT_EQ(storedDate.getMonth(), 12);
+    ASSERT_EQ(storedDate.getYear(), 2012);
+
+    std::vector<std::string> storedList = a.getProductList();
+    ASSERT_EQ(storedList[0], "banan");
+    ASSERT_EQ(storedList[1], "gruszka");
+    ASSERT_EQ(storedList[2], "kiwi");
+
+    ASSERT_EQ(a.getStatusCode(), SENT);
+    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+}
 TEST(order, order_init_and_getters_2)
 {
-    order
+    date d = date(31, 12, 2012);
+    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
+
+    order a = order("name", "surname", d, pl, "Warszawa, plac politechniki 1");
+    ASSERT_EQ(a.getName(), "name");
+    ASSERT_EQ(a.getSurname(), "surname");
+
+    date storedDate = a.getDate();
+    ASSERT_EQ(storedDate.getDay(), 31);
+    ASSERT_EQ(storedDate.getMonth(), 12);
+    ASSERT_EQ(storedDate.getYear(), 2012);
+
+    std::vector<std::string> storedList = a.getProductList();
+    ASSERT_EQ(storedList[0], "banan");
+    ASSERT_EQ(storedList[1], "gruszka");
+    ASSERT_EQ(storedList[2], "kiwi");
+
+    ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
+    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+}
+TEST(order, order_init_and_getters_3)
+{
+    date d = date(31, 12, 2012);
+
+    order a = order("name", "surname", d, "Warszawa, plac politechniki 1");
+    ASSERT_EQ(a.getName(), "name");
+    ASSERT_EQ(a.getSurname(), "surname");
+
+    date storedDate = a.getDate();
+    ASSERT_EQ(storedDate.getDay(), 31);
+    ASSERT_EQ(storedDate.getMonth(), 12);
+    ASSERT_EQ(storedDate.getYear(), 2012);
+
+    ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
+    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+}
+
+TEST(order, order_init_and_getters_wrong_input)
+{
+    date d = date(31, 12, 2012);
+    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
+
+    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
+    ASSERT_EQ(a.getName(), "name");
+    ASSERT_EQ(a.getSurname(), "surname");
+
+    date storedDate = a.getDate();
+    ASSERT_EQ(storedDate.getDay(), 31);
+    ASSERT_EQ(storedDate.getMonth(), 12);
+    ASSERT_EQ(storedDate.getYear(), 2012);
+
+    std::vector<std::string> storedList = a.getProductList();
+    ASSERT_EQ(storedList[0], "banan");
+    ASSERT_EQ(storedList[1], "gruszka");
+    ASSERT_EQ(storedList[2], "kiwi");
+
+    ASSERT_EQ(a.getStatusCode(), SENT);
+    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+}
+
+TEST(order, order_init_and_getters_4)
+{
+    // testing if error does not occur
+    order a = order();
+}
+
+TEST(order, order_setters_1)
+{
+    date d = date(31, 12, 2012);
+    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
+
+    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
+
+    a.setName("Marek");
+    ASSERT_EQ(a.getName(), "Marek");
+
+    a.setSurname("Kaganek");
+    ASSERT_EQ(a.getSurname(), "Kaganek");
+
+    date d1 = date(1, 2, 3);
+    a.setDate(d1);
+    date storedDate = a.getDate();
+    ASSERT_EQ(storedDate.getDay(), 1);
+    ASSERT_EQ(storedDate.getMonth(), 2);
+    ASSERT_EQ(storedDate.getYear(), 3);
+
+    a.setStatusCode(CANCELED);
+    ASSERT_EQ(a.getStatusCode(), CANCELED);
 }
