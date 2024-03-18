@@ -1,5 +1,4 @@
 #include "order.h"
-#include "statusCodes.h"
 
 // constructors
 order::order(
@@ -28,6 +27,7 @@ order::order(
     this->name = name;
     this->surname = surname;
     this->date = date;
+    this->statusCode = ORDER_PLACED;
     this->productList = productList;
     this->shipmentAddress = shipmentAddress;
 }
@@ -36,12 +36,13 @@ order::order(
     std::string name,
     std::string surname,
     std::string date,
-    std::vector<std::string> productList,
     std::string shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
     this->date = date;
+    this->statusCode = ORDER_PLACED;
+    this->productList = std::vector<std::string>(1);
     this->shipmentAddress = shipmentAddress;
 }
 
