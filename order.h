@@ -1,22 +1,24 @@
+#pragma once
+
 #include <string>
 #include "statusCodes.h"
+#include "date.h"
 
 class order
 {
     std::string name;
     std::string surname;
-    std::string date; // zmienić na jakąś klasę ??
-    // std::ctime ?
+    date orderDate; // zmienić na jakąś klasę ??
     std::vector<std::string> productList;
     int statusCode;
     std::string shipmentAddress;
 
 public:
-    // full constructor
+    // full constructorf
     order(
         std::string name,
         std::string surname,
-        std::string date,
+        date orderDate,
         std::vector<std::string> productList,
         int statusCode,
         std::string shipmentAddress);
@@ -25,7 +27,7 @@ public:
     order(
         std::string name,
         std::string surname,
-        std::string date,
+        date orderDate,
         std::vector<std::string> productList,
         std::string shipmentAddress);
 
@@ -33,7 +35,7 @@ public:
     order(
         std::string name,
         std::string surname,
-        std::string date,
+        date orderDate,
         std::string shipmentAddress);
 
     order() = default;
@@ -44,8 +46,8 @@ public:
     void setSurname(std::string newSurname);
     std::string getSurname() const;
 
-    void setDate(std::string date);
-    std::string getDate() const;
+    void setDate(date orderDate);
+    date getDate() const;
 
     void setProductList(std::vector<std::string> productList);
     std::vector<std::string> getProductList() const;

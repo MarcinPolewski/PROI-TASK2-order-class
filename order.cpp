@@ -4,14 +4,14 @@
 order::order(
     std::string name,
     std::string surname,
-    std::string date,
+    date orderDate,
     std::vector<std::string> productList,
     int statusCode,
     std::string shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
-    this->date = date;
+    this->orderDate = orderDate;
     this->productList = productList;
     this->statusCode = statusCode;
     this->shipmentAddress = shipmentAddress;
@@ -20,13 +20,13 @@ order::order(
 order::order(
     std::string name,
     std::string surname,
-    std::string date,
+    date orderDate,
     std::vector<std::string> productList,
     std::string shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
-    this->date = date;
+    this->orderDate = orderDate;
     this->statusCode = ORDER_PLACED;
     this->productList = productList;
     this->shipmentAddress = shipmentAddress;
@@ -35,12 +35,12 @@ order::order(
 order::order(
     std::string name,
     std::string surname,
-    std::string date,
+    date orderDate,
     std::string shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
-    this->date = date;
+    this->orderDate = orderDate;
     this->statusCode = ORDER_PLACED;
     this->productList = std::vector<std::string>(1);
     this->shipmentAddress = shipmentAddress;
@@ -49,16 +49,15 @@ order::order(
 // getters and setters
 void order::setName(std::string newName)
 {
+    this->name = newName;
 }
 std::string order::getName() const { return name; }
 
-void order::setSurname(std::string newSurname) {}
+void order::setSurname(std::string newSurname) { this->surname = newSurname; }
 std::string order::getSurname() const { return surname; }
 
-void order::setDate(std::string date)
-{
-}
-std::string order::getDate() const { return "poniedzialek"; }
+void order::setDate(date orderDate) { this->orderDate = orderDate; }
+date order::getDate() const { return orderDate; }
 
 void order::setProductList(std::vector<std::string> productList) {}
 std::vector<std::string> order::getProductList() const { return productList; }

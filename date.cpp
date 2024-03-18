@@ -1,3 +1,5 @@
+#pragma once
+
 #include "date.h"
 
 date::date(unsigned int day, unsigned int month, unsigned int year)
