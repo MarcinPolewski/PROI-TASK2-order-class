@@ -4,15 +4,6 @@
 #include "statusCodes.h"
 
 // testing date class
-
-TEST(date, testing_if_tests_work)
-{
-    date a = date(1, 2, 3);
-    ASSERT_EQ(a.getDay(), 5);
-    ASSERT_EQ(a.getMonth(), 5);
-    ASSERT_EQ(a.getYear(), 3);
-}
-
 TEST(date, date_init_and_getters_1)
 {
     date a = date(1, 2, 3);
@@ -28,12 +19,11 @@ TEST(date, date_init_and_getters_2)
     ASSERT_EQ(a.getYear(), 2222);
 }
 
-TEST(date, date_init_and_getters_wrong_input)
+TEST(date, date_init_and_getters_errors)
 {
-    // sprawdzamy czy błędu nie wyrzuciu
-    date a = date(33, 12, 2222);
-    date b = date(31, 13, 2222);
-    date c = date(33, 13, 123);
+    ASSERT_THROW(date(33, 12, 2222), std::invalid_argument);
+    ASSERT_THROW(date(31, 13, 2222), std::invalid_argument);
+    ASSERT_THROW(date(33, 13, 2222), std::invalid_argument);
 }
 
 TEST(date, date_setDay)
@@ -44,13 +34,10 @@ TEST(date, date_setDay)
     ASSERT_EQ(a.getMonth(), 12);
     ASSERT_EQ(a.getYear(), 2222);
 }
-TEST(date, date_setDay_wrong_input)
+TEST(date, date_setDay_error)
 {
     date a = date(31, 12, 2222);
-    a.setDay(32);
-    ASSERT_EQ(a.getDay(), 31);
-    ASSERT_EQ(a.getMonth(), 12);
-    ASSERT_EQ(a.getYear(), 2222);
+    ASSERT_THROW(a.setDay(32), std::invalid_argument);
 }
 
 TEST(date, date_setMonth)
@@ -61,13 +48,10 @@ TEST(date, date_setMonth)
     ASSERT_EQ(a.getMonth(), 1);
     ASSERT_EQ(a.getYear(), 2222);
 }
-TEST(date, date_setMonth_wrong_input)
+TEST(date, date_setMonth_error)
 {
     date a = date(31, 12, 2222);
-    a.setMonth(13);
-    ASSERT_EQ(a.getDay(), 31);
-    ASSERT_EQ(a.getMonth(), 12);
-    ASSERT_EQ(a.getYear(), 2222);
+    ASSERT_THROW(a.setMonth(13), std::invalid_argument);
 }
 
 TEST(date, date_setYear)
@@ -156,27 +140,12 @@ TEST(order, order_init_and_getters_3)
     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
 }
 
-TEST(order, order_init_and_getters_wrong_input)
+TEST(order, order_init_and_getters_error)
 {
     date d = date(31, 12, 2012);
     std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
 
     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
-    ASSERT_EQ(a.getName(), "name");
-    ASSERT_EQ(a.getSurname(), "surname");
-
-    date storedDate = a.getDate();
-    ASSERT_EQ(storedDate.getDay(), 31);
-    ASSERT_EQ(storedDate.getMonth(), 12);
-    ASSERT_EQ(storedDate.getYear(), 2012);
-
-    std::vector<std::string> storedList = a.getProductList();
-    ASSERT_EQ(storedList[0], "banan");
-    ASSERT_EQ(storedList[1], "gruszka");
-    ASSERT_EQ(storedList[2], "kiwi");
-
-    ASSERT_EQ(a.getStatusCode(), SENT);
-    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
 }
 
 TEST(order, order_init_and_getters_4)
@@ -207,4 +176,7 @@ TEST(order, order_setters_1)
 
     a.setStatusCode(CANCELED);
     ASSERT_EQ(a.getStatusCode(), CANCELED);
+
+    a.setShipmentAddress("inny address");
+    ASSERT_EQ(a.getShipmentAddress(), "inny address");
 }

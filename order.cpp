@@ -59,11 +59,11 @@ std::string order::getSurname() const { return surname; }
 void order::setDate(date orderDate) { this->orderDate = orderDate; }
 date order::getDate() const { return orderDate; }
 
-void order::setProductList(std::vector<std::string> productList) {}
+void order::setProductList(std::vector<std::string> productList) { this->productList = productList; }
 std::vector<std::string> order::getProductList() const { return productList; }
 
-void order::setStatusCode(orderStatus statusCode) {}
+void order::setStatusCode(orderStatus statusCode) { this->statusCode = statusCode; }
 orderStatus order::getStatusCode() const { return statusCode; }
 
-void order::setShipmentAddress(std::string shipmentAddress) {}
+void order::setShipmentAddress(std::string shipmentAddress) { this->shipmentAddress = shipmentAddress; }
 std::string order::getShipmentAddress() const { return shipmentAddress; }

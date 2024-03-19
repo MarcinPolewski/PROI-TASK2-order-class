@@ -1,15 +1,16 @@
 #pragma once
 
 #include "date.h"
+#include <stdexcept>
 
 date::date(unsigned int day, unsigned int month, unsigned int year)
 {
-    if (day <= 31 && month <= 12)
-    {
-        this->day = day;
-        this->month = month;
-        this->year = year;
-    }
+    if (day > 31 || month > 12)
+        throw std::invalid_argument("test");
+
+    this->day = day;
+    this->month = month;
+    this->year = year;
 }
 
 unsigned int date::getDay() const
@@ -18,8 +19,10 @@ unsigned int date::getDay() const
 }
 void date::setDay(unsigned int day)
 {
-    if (day <= 31)
-        this->day = day;
+    if (day > 31)
+        throw std::invalid_argument("test");
+
+    this->day = day;
 }
 
 unsigned int date::getMonth() const
@@ -28,8 +31,10 @@ unsigned int date::getMonth() const
 }
 void date::setMonth(unsigned int month)
 {
-    if (month <= 12)
-        this->month = month;
+    if (month > 12)
+        throw std::invalid_argument("test");
+
+    this->month = month;
 }
 
 unsigned int date::getYear() const
@@ -50,10 +55,10 @@ std::string date::getDateStr() const
 
 void date::setDate(unsigned int day, unsigned int month, unsigned int year)
 {
-    if (day <= 31 && month <= 12)
-    {
-        this->day = day;
-        this->month = month;
-        this->year = year;
-    }
+    if (day > 31 || month > 12)
+        throw std::invalid_argument("test");
+
+    this->day = day;
+    this->month = month;
+    this->year = year;
 }
