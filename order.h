@@ -8,9 +8,9 @@ class order
 {
     std::string name;
     std::string surname;
-    date orderDate; // zmienić na jakąś klasę ??
+    date orderDate;
     std::vector<std::string> productList;
-    int statusCode;
+    orderStatus statusCode = ORDER_PLACED;
     std::string shipmentAddress;
 
 public:
@@ -20,7 +20,7 @@ public:
         std::string surname,
         date orderDate,
         std::vector<std::string> productList,
-        int statusCode,
+        orderStatus statusCode,
         std::string shipmentAddress);
 
     // default statusCode
@@ -52,8 +52,8 @@ public:
     void setProductList(std::vector<std::string> productList);
     std::vector<std::string> getProductList() const;
 
-    void setStatusCode(int statusCode);
-    int getStatusCode() const;
+    void setStatusCode(orderStatus statusCode);
+    orderStatus getStatusCode() const;
 
     void setShipmentAddress(std::string shipmentAddress);
     std::string getShipmentAddress() const;
