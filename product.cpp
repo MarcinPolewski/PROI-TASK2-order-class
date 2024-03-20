@@ -1,9 +1,10 @@
 #include "product.h"
 
-product::product(std::string name, unsigned int idNumber)
+product::product(std::string name, unsigned int idNumber, unsigned int priceInGr)
 {
     this->idNumber = idNumber;
     this->name = name;
+    this->priceInGr = priceInGr;
 }
 
 void product::setName(std::string name) { this->name = name; }
