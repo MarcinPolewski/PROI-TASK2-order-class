@@ -177,9 +177,10 @@ TEST(order, order_setters_1)
 // testing product
 TEST(product, product_init_and_getters_1)
 {
-    product p = product("banan", 1);
+    product p = product("banan", 1, 5);
     ASSERT_EQ(p.getName(), "banan");
     ASSERT_EQ(p.getIdNumber(), 1);
+    ASSERT_EQ(p.getPriceInGr(), 5);
 }
 
 TEST(product, product_init_and_getters_2)
@@ -190,18 +191,30 @@ TEST(product, product_init_and_getters_2)
 
 TEST(product, product_setName)
 {
-    product p = product("jablko", 2);
+    product p = product("jablko", 2, 5);
 
     p.setName("kiwi");
     ASSERT_EQ(p.getName(), "kiwi");
     ASSERT_EQ(p.getIdNumber(), 2);
+    ASSERT_EQ(p.getPriceInGr(), 5);
 }
 
 TEST(product, product_setIdNumber)
 {
-    product p = product("jablko", 5);
+    product p = product("jablko", 5, 15);
 
     p.setIdNumber(10);
     ASSERT_EQ(p.getName(), "kiwi");
     ASSERT_EQ(p.getIdNumber(), 10);
+    ASSERT_EQ(p.getPriceInGr(), 15);
+}
+
+TEST(product, product_setPriceInGr)
+{
+    product p = product("jablko", 5, 15);
+
+    p.setPriceInGr(100);
+    ASSERT_EQ(p.getName(), "kiwi");
+    ASSERT_EQ(p.getIdNumber(), 5);
+    ASSERT_EQ(p.getPriceInGr(), 100);
 }

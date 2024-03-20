@@ -5,10 +5,11 @@ class product
 {
     std::string name;
     unsigned int idNumber;
+    unsigned int priceInGr;
 
 public:
     // constructors
-    product(std::string name, unsigned int idNumber);
+    product(std::string name, unsigned int idNumber, unsigned int price);
     product() = default;
 
     // getters and setters
@@ -17,4 +18,7 @@ public:
 
     void setIdNumber(unsigned int id);
     unsigned int getIdNumber() const;
+
+    void setPriceInGr(unsigned int price);
+    unsigned int getPriceInGr() const;
 };
