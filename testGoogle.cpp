@@ -2,6 +2,7 @@
 #include "order.h"
 #include "date.h"
 #include "statusCodes.h"
+#include "product.h"
 
 // testing date class
 TEST(date, date_init_and_getters_1)
@@ -82,7 +83,7 @@ TEST(date, date_getDateStr)
 TEST(order, order_init_and_getters_1)
 {
     date d = date(31, 12, 2012);
-    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
+    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
 
     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
     ASSERT_EQ(a.getName(), "name");
@@ -93,10 +94,10 @@ TEST(order, order_init_and_getters_1)
     ASSERT_EQ(storedDate.getMonth(), 12);
     ASSERT_EQ(storedDate.getYear(), 2012);
 
-    std::vector<std::string> storedList = a.getProductList();
-    ASSERT_EQ(storedList[0], "banan");
-    ASSERT_EQ(storedList[1], "gruszka");
-    ASSERT_EQ(storedList[2], "kiwi");
+    std::vector<std::pair<std::string, int>> storedList = a.getProductList();
+    ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
+    ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
+    ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
 
     ASSERT_EQ(a.getStatusCode(), SENT);
     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
@@ -104,7 +105,7 @@ TEST(order, order_init_and_getters_1)
 TEST(order, order_init_and_getters_2)
 {
     date d = date(31, 12, 2012);
-    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
+    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
 
     order a = order("name", "surname", d, pl, "Warszawa, plac politechniki 1");
     ASSERT_EQ(a.getName(), "name");
@@ -115,10 +116,11 @@ TEST(order, order_init_and_getters_2)
     ASSERT_EQ(storedDate.getMonth(), 12);
     ASSERT_EQ(storedDate.getYear(), 2012);
 
-    std::vector<std::string> storedList = a.getProductList();
-    ASSERT_EQ(storedList[0], "banan");
-    ASSERT_EQ(storedList[1], "gruszka");
-    ASSERT_EQ(storedList[2], "kiwi");
+    std::vector<std::pair<std::string, int>> storedList = a.getProductList();
+    std::string aa = "banan";
+    ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
+    ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
+    ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
 
     ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
@@ -140,14 +142,6 @@ TEST(order, order_init_and_getters_3)
     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
 }
 
-TEST(order, order_init_and_getters_error)
-{
-    date d = date(31, 12, 2012);
-    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
-
-    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
-}
-
 TEST(order, order_init_and_getters_4)
 {
     // testing if error does not occur
@@ -157,8 +151,7 @@ TEST(order, order_init_and_getters_4)
 TEST(order, order_setters_1)
 {
     date d = date(31, 12, 2012);
-    std::vector<std::string> pl = {"banan", "gruszka", "kiwi"};
-
+    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
 
     a.setName("Marek");
@@ -179,4 +172,36 @@ TEST(order, order_setters_1)
 
     a.setShipmentAddress("inny address");
     ASSERT_EQ(a.getShipmentAddress(), "inny address");
+}
+
+// testing product
+TEST(product, product_init_and_getters_1)
+{
+    product p = product("banan", 1);
+    ASSERT_EQ(p.getName(), "banan");
+    ASSERT_EQ(p.getIdNumber(), 1);
+}
+
+TEST(product, product_init_and_getters_2)
+{
+    // patrzymy czy nie wyrzuca błędu
+    product p = product();
+}
+
+TEST(product, product_setName)
+{
+    product p = product("jablko", 2);
+
+    p.setName("kiwi");
+    ASSERT_EQ(p.getName(), "kiwi");
+    ASSERT_EQ(p.getIdNumber(), 2);
+}
+
+TEST(product, product_setIdNumber)
+{
+    product p = product("jablko", 5);
+
+    p.setIdNumber(10);
+    ASSERT_EQ(p.getName(), "kiwi");
+    ASSERT_EQ(p.getIdNumber(), 10);
 }
