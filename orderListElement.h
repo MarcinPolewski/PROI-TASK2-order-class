@@ -10,7 +10,7 @@ class orderListElement
 
 public:
     orderListElement(product orderProduct, unsigned int quantity);
-    orderListElement() = default;
+    orderListElement(){};
 
     void setProduct(product orderProduct);
     product getProduct() const;
