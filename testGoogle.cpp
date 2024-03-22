@@ -703,3 +703,69 @@ TEST(order, order_addElement_array_sorted)
     ASSERT_EQ(o.getProductList()[2] == element3, true);
     ASSERT_EQ(o.getProductList()[3] == element4, true);
 }
+
+TEST(order, order_findProduct)
+{
+    date d1 = date(31, 12, 2030);
+    product p1 = product("banan", 1, 399);
+    product p2 = product("orange", 2, 499);
+    product p3 = product("yoghurt", 3, 199);
+    product p4 = product("bread", 5, 799);
+
+    orderListElement element1 = orderListElement(p1, 5);
+    orderListElement element2 = orderListElement(p2, 10);
+    orderListElement element3 = orderListElement(p3, 15);
+    orderListElement element4 = orderListElement(p4, 20);
+    std::vector<orderListElement> prodList1 = {element1, element2, element3, element4};
+
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a1 = address(country, city, postalCode, street, houseNumber);
+
+    std::string name = "Jorek";
+    std::string surname = "Ogorek";
+
+    order o = order(name, surname, d1, prodList1, a1);
+    std::vector<orderListElement>::iterator baseIt = o.getProductList().begin();
+
+    ASSERT_EQ(o.findProduct(1), baseIt);
+    ASSERT_EQ(o.findProduct(2), baseIt + 1);
+    ASSERT_EQ(o.findProduct(3), baseIt + 2);
+    ASSERT_EQ(o.findProduct(5), baseIt + 3);
+}
+
+TEST(order, order_findProduct_no_such_product)
+{
+    date d1 = date(31, 12, 2030);
+    product p1 = product("banan", 1, 399);
+    product p2 = product("orange", 2, 499);
+    product p3 = product("yoghurt", 3, 199);
+    product p4 = product("bread", 5, 799);
+
+    orderListElement element1 = orderListElement(p1, 5);
+    orderListElement element2 = orderListElement(p2, 10);
+    orderListElement element3 = orderListElement(p3, 15);
+    orderListElement element4 = orderListElement(p4, 20);
+    std::vector<orderListElement> prodList1 = {element1, element2, element3, element4};
+
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a1 = address(country, city, postalCode, street, houseNumber);
+
+    std::string name = "Jorek";
+    std::string surname = "Ogorek";
+
+    order o = order(name, surname, d1, prodList1, a1);
+    std::vector<orderListElement>::iterator endIt = o.getProductList().end();
+
+    ASSERT_EQ(o.findProduct(-1), endIt);
+    ASSERT_EQ(o.findProduct(10), endIt);
+}
