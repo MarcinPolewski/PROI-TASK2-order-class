@@ -57,6 +57,6 @@ public:
     void addProduct(product productToAdd, unsigned int quantity);
     void removeProduct(int productId);
     void removeProduct(product productToRemove);
-    int getTotalPriceInGr();
-    int getTotalNumberOfProducts();
+    unsigned int getTotalPriceInGr();
+    unsigned int getTotalNumberOfProducts();
 };
