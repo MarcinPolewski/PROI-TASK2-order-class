@@ -156,6 +156,17 @@ TEST(product, product_equals_operator_not_equal)
     // ASSERT_EQ(p1, p2); <- tak nie działa :(
 }
 
+TEST(product, product_order_operator)
+{
+    product p1 = product("jablko", 5, 15);
+    product p2 = product("gruszka", 10, 15);
+
+    ASSERT_EQ(p1 < p2, true);
+    ASSERT_EQ(p1 > p2, false);
+    ASSERT_EQ(p2 > p1, true);
+    ASSERT_EQ(p2 < p1, false);
+}
+
 // testing orderListElement
 TEST(orderListElement, orderListElement_init_and_getters)
 {

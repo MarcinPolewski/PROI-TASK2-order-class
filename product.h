@@ -22,4 +22,6 @@ public:
     unsigned int getPriceInGr() const;
 
     bool operator==(const product &p);
+    bool operator>(const product &p);
+    bool operator<(const product &p);
 };
