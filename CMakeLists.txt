@@ -12,7 +12,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-set(PROJECT_SOURCES order.cpp order.h date.h date.cpp statusCodes.h)
+set(PROJECT_SOURCES order.cpp order.h date.h date.cpp statusCodes.h product.h product.cpp orderListElement.h orderListElement.cpp)
 
 add_executable(order order.cpp  ${PROJECT_SOURCES} )
 
