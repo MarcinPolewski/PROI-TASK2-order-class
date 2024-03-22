@@ -214,20 +214,58 @@ TEST(product, product_setPriceInGr)
     ASSERT_EQ(p.getPriceInGr(), 100);
 }
 
+TEST(product, product_equals_operator_equal)
+{
+    product p1 = product("jablko", 5, 15);
+    product p2 = product("jablko", 5, 15);
+    ASSERT_EQ(p1 == p2, true);
+    // ASSERT_EQ(p1, p2); <- tak nie działa :(
+}
+
+TEST(product, product_equals_operator_not_equal)
+{
+    product p1 = product("jablko", 5, 15);
+    product p2 = product("gruszka", 10, 15);
+    ASSERT_EQ(p1 == p2, false);
+    // ASSERT_EQ(p1, p2); <- tak nie działa :(
+}
+
+// testing orderListElement
 TEST(orderListElement, orderListElement_init_and_getters)
 {
     product p = product("jablko", 5, 15);
     orderListElement element = orderListElement(p, 10);
 
-    ASSERT_EQ(element.getProduct(), p);
+    ASSERT_EQ(element.getProduct() == p, true);
     ASSERT_EQ(element.getQuantitiy(), 10);
     ASSERT_EQ(element.getTotalPriceGr(), 10 * 15);
 }
-// testing orderListElement
-// TEST(orderListElement, orderListElement_init_and_getters)
-// {
-//     product banan = product("banan", 1, 799);
-//     orderListElement element = orderListElement(banan, 2);
 
-//     ASSERT_EQ(orderListElement.getProduct(), element);
-// }
+TEST(orderListElement, orderListElement_equals_operator)
+{
+    product p = product("jablko", 5, 15);
+    orderListElement element1 = orderListElement(p, 10);
+    orderListElement element2 = orderListElement(p, 10);
+
+    ASSERT_EQ(element1 == element2, true);
+}
+
+TEST(orderListElement, orderListElement_set_product)
+{
+    product p1 = product("jablko", 5, 15);
+    product p2 = product("banan", 111, 399);
+
+    orderListElement element = orderListElement(p1, 10);
+
+    element.setProduct(p2);
+    ASSERT_EQ(element.getProduct() == p2, true);
+}
+
+TEST(orderListElement, orderListElement_setQuantity)
+{
+    product p1 = product("jablko", 5, 15);
+    orderListElement element = orderListElement(p1, 10);
+
+    element.setQuantity(555);
+    ASSERT_EQ(element.getQuantitiy(), 555);
+}
