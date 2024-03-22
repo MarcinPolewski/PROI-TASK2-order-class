@@ -20,4 +20,6 @@ public:
 
     void setPriceInGr(unsigned int price);
     unsigned int getPriceInGr() const;
+
+    bool operator==(const product &p);
 };

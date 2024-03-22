@@ -15,3 +15,4 @@ unsigned int product::getIdNumber() const { return idNumber; }
 
 void product::setPriceInGr(unsigned int price) { this->priceInGr = price; }
 unsigned int product::getPriceInGr() const { return priceInGr; }
+bool product::operator==(const product &p) { return idNumber == p.getIdNumber(); }

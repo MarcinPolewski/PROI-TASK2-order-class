@@ -20,4 +20,6 @@ public:
     unsigned int getQuantitiy() const;
 
     unsigned int getTotalPriceGr() const;
+
+    bool operator==(const orderListElement &anotherElement);
 };

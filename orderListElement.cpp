@@ -22,3 +22,8 @@ unsigned int orderListElement::getTotalPriceGr() const
 {
     return quantity * orderProduct.getPriceInGr();
 }
+
+bool orderListElement::operator==(const orderListElement &anotherElement)
+{
+    return quantity == anotherElement.getQuantitiy() && orderProduct == anotherElement.getProduct();
+}
