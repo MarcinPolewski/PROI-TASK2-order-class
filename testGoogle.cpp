@@ -442,6 +442,60 @@ TEST(order, order_setName)
     ASSERT_EQ(o.getName() == newName, true);
 }
 
+TEST(order, order_getTotalPrice)
+{
+    date d = date(31, 12, 2030);
+    product p1 = product("banan", 1, 399);
+    product p2 = product("orange", 2, 499);
+    product p3 = product("yoghurt", 3, 199);
+
+    orderListElement element1 = orderListElement(p1, 5);
+    orderListElement element2 = orderListElement(p2, 10);
+    orderListElement element3 = orderListElement(p3, 15);
+    std::vector<orderListElement> prodList = {element1, element2, element3};
+
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+
+    std::string name = "Jorek";
+    std::string surname = "Ogorek";
+
+    order o = order(name, surname, d, prodList, orderStatus::SENT, a);
+    ASSERT_EQ(o.getTotalPriceInGr(), (399 * 5) + (499 * 10) + (199 * 15));
+}
+
+TEST(order, order_getTotalNumberOfProducts)
+{
+    date d = date(31, 12, 2030);
+    product p1 = product("banan", 1, 399);
+    product p2 = product("orange", 2, 499);
+    product p3 = product("yoghurt", 3, 199);
+
+    orderListElement element1 = orderListElement(p1, 5);
+    orderListElement element2 = orderListElement(p2, 10);
+    orderListElement element3 = orderListElement(p3, 15);
+    std::vector<orderListElement> prodList = {element1, element2, element3};
+
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+
+    std::string name = "Jorek";
+    std::string surname = "Ogorek";
+
+    order o = order(name, surname, d, prodList, orderStatus::SENT, a);
+    ASSERT_EQ(o.getTotalNumberOfProducts(), 5 + 10 + 15);
+}
+
 TEST(order, order_setSurname)
 {
     date d = date(31, 12, 2030);
