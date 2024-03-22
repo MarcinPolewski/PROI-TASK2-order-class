@@ -108,6 +108,13 @@ void order::addListElement(orderListElement &newElement)
     }
     *(productList.begin() + it + 1) = newElement;
 }
+
+void order::addProduct(product productToAdd, unsigned int quantity)
+{
+    orderListElement listElement = orderListElement(productToAdd, quantity);
+    addListElement(listElement);
+}
+
 void order::removeProduct(int productId)
 {
     std::vector<orderListElement>::iterator foundElementIt = findProduct(productId);

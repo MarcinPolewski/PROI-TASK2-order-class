@@ -795,6 +795,52 @@ TEST(order, order_addElement_duplicate)
     ASSERT_EQ(o.getProductList()[3].getProduct() == p4, true);
 }
 
+TEST(order, order_addProduct)
+{
+    date d1 = date(31, 12, 2030);
+    product p1 = product("banan", 1, 399);
+    product p2 = product("orange", 2, 499);
+    product p3 = product("yoghurt", 3, 199);
+    product p4 = product("bread", 5, 799);
+
+    orderListElement element1 = orderListElement(p1, 5);
+    orderListElement element2 = orderListElement(p2, 10);
+    orderListElement element3 = orderListElement(p3, 15);
+    orderListElement element4 = orderListElement(p4, 20);
+    std::vector<orderListElement> prodList1;
+
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a1 = address(country, city, postalCode, street, houseNumber);
+
+    std::string name = "Jorek";
+    std::string surname = "Ogorek";
+
+    order o = order(name, surname, d1, prodList1, orderStatus::SENT, a1);
+
+    o.addProduct(p4, 20);
+    ASSERT_EQ(o.getProductList()[0] == element4, true);
+
+    o.addProduct(p3, 15);
+    ASSERT_EQ(o.getProductList()[0] == element3, true);
+    ASSERT_EQ(o.getProductList()[1] == element4, true);
+
+    o.addProduct(p2, 10);
+    ASSERT_EQ(o.getProductList()[0] == element2, true);
+    ASSERT_EQ(o.getProductList()[1] == element3, true);
+    ASSERT_EQ(o.getProductList()[2] == element4, true);
+
+    o.addProduct(p1, 5);
+    ASSERT_EQ(o.getProductList()[0] == element1, true);
+    ASSERT_EQ(o.getProductList()[1] == element2, true);
+    ASSERT_EQ(o.getProductList()[2] == element3, true);
+    ASSERT_EQ(o.getProductList()[3] == element4, true);
+}
+
 TEST(order, order_findProduct)
 {
     date d1 = date(31, 12, 2030);
