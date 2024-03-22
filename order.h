@@ -52,6 +52,7 @@ public:
     const address &getShipmentAddress() const;
 
     std::vector<orderListElement>::iterator findProduct(int productId);
+    std::vector<orderListElement>::iterator findProduct(product seekedProduct);
     void addListElement(orderListElement &newElement);
     void removeProduct(int productId);
     int getTotalPriceInGr();

@@ -61,20 +61,45 @@ orderStatus order::getStatusCode() const { return statusCode; }
 void order::setShipmentAddress(address &shipmentAddress) { this->shipmentAddress = shipmentAddress; }
 const address &order::getShipmentAddress() const { return shipmentAddress; }
 
+std::vector<orderListElement>::iterator order::findProduct(product seekedProduct)
+{
+    return findProduct(seekedProduct.getIdNumber());
+}
+
 std::vector<orderListElement>::iterator order::findProduct(int productId)
 {
-    // implement binary search tree
+    int l = 0, r = productList.size() - 1, mid;
+    while (l <= r)
+    {
+        mid = (l + r) / 2;
+        if (productId == productList[mid].getProduct().getIdNumber())
+            return productList.begin() + mid;
+        if (productId > productList[mid].getProduct().getIdNumber())
+            l = mid + 1;
+        else
+            r = mid - 1;
+    }
+    return productList.end();
 }
 void order::addListElement(orderListElement &newElement)
 {
-    // 1. extending the array
+    // 1. check if such product is on list
+    std::vector<orderListElement>::iterator foundElementIt = findProduct(newElement.getProduct());
+    if (foundElementIt != productList.end()) // if element was found, we just add quantities
+    {
+        unsigned int newQuantity = (*foundElementIt).getQuantitiy() + newElement.getQuantitiy();
+        (*foundElementIt).setQuantity(newQuantity);
+        return;
+    }
+
+    // 2. extending the array
     productList.push_back(newElement);
 
     if (productList.size() == 1)
         return;
 
-    // 2. placing the element into sorted array
-    int it = productList.size() - 2;
+    // 3. placing the element into sorted array
+    int it = productList.size() - 2; // index in array indicating currently compared element
     // moving bigger elements to the right side of the array
     while (it >= 0 && newElement.getProduct() < (*(productList.begin() + it)).getProduct())
     {
