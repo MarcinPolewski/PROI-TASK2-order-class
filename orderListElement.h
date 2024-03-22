@@ -22,4 +22,5 @@ public:
     unsigned int getTotalPriceGr() const;
 
     bool operator==(const orderListElement &anotherElement);
+    bool operator>(const orderListElement &amotherElement);
 };

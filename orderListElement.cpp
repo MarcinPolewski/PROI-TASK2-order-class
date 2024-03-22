@@ -27,3 +27,8 @@ bool orderListElement::operator==(const orderListElement &anotherElement)
 {
     return quantity == anotherElement.getQuantitiy() && orderProduct == anotherElement.getProduct();
 }
+
+bool orderListElement::operator>(const orderListElement &anotherElement)
+{
+    return orderProduct.getIdNumber() > anotherElement.getProduct().getIdNumber();
+}
