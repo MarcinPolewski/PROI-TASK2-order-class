@@ -6,11 +6,12 @@
 class orderListElement
 {
     unsigned int quantity;
-    product orderProduct;
+    product orderProduct = product("a", 1, 1); // bez tego nie działa
+    // wyrzuca błąd ze product nie ma defaultowego konstruktora i ze
+    // klasa musi zostac zainicjalizowana
 
 public:
     orderListElement(product orderProduct, unsigned int quantity);
-    orderListElement(){};
 
     void setProduct(product orderProduct);
     product getProduct() const;

@@ -32,20 +32,6 @@ order::order(
     this->shipmentAddress = shipmentAddress;
 }
 
-order::order(
-    std::string name,
-    std::string surname,
-    date orderDate,
-    std::string shipmentAddress)
-{
-    this->name = name;
-    this->surname = surname;
-    this->orderDate = orderDate;
-    this->statusCode = ORDER_PLACED;
-    this->productList = std::vector<orderListElement>(1);
-    this->shipmentAddress = shipmentAddress;
-}
-
 // getters and setters
 void order::setName(std::string newName)
 {

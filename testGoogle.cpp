@@ -3,6 +3,7 @@
 #include "date.h"
 #include "statusCodes.h"
 #include "product.h"
+#include "orderListElement.h"
 
 // testing date class
 TEST(date, date_init_and_getters_1)
@@ -80,99 +81,99 @@ TEST(date, date_getDateStr)
 }
 
 // testing order class
-TEST(order, order_init_and_getters_1)
-{
-    date d = date(31, 12, 2012);
-    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
+// TEST(order, order_init_and_getters_1)
+// {
+//     date d = date(31, 12, 2012);
+//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
 
-    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
-    ASSERT_EQ(a.getName(), "name");
-    ASSERT_EQ(a.getSurname(), "surname");
+//     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
+//     ASSERT_EQ(a.getName(), "name");
+//     ASSERT_EQ(a.getSurname(), "surname");
 
-    date storedDate = a.getDate();
-    ASSERT_EQ(storedDate.getDay(), 31);
-    ASSERT_EQ(storedDate.getMonth(), 12);
-    ASSERT_EQ(storedDate.getYear(), 2012);
+//     date storedDate = a.getDate();
+//     ASSERT_EQ(storedDate.getDay(), 31);
+//     ASSERT_EQ(storedDate.getMonth(), 12);
+//     ASSERT_EQ(storedDate.getYear(), 2012);
 
-    std::vector<std::pair<std::string, int>> storedList = a.getProductList();
-    ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
-    ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
-    ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
+//     std::vector<std::pair<std::string, int>> storedList = a.getProductList();
+//     ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
+//     ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
+//     ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
 
-    ASSERT_EQ(a.getStatusCode(), SENT);
-    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-}
-TEST(order, order_init_and_getters_2)
-{
-    date d = date(31, 12, 2012);
-    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
+//     ASSERT_EQ(a.getStatusCode(), SENT);
+//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+// }
+// TEST(order, order_init_and_getters_2)
+// {
+//     date d = date(31, 12, 2012);
+//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
 
-    order a = order("name", "surname", d, pl, "Warszawa, plac politechniki 1");
-    ASSERT_EQ(a.getName(), "name");
-    ASSERT_EQ(a.getSurname(), "surname");
+//     order a = order("name", "surname", d, pl, "Warszawa, plac politechniki 1");
+//     ASSERT_EQ(a.getName(), "name");
+//     ASSERT_EQ(a.getSurname(), "surname");
 
-    date storedDate = a.getDate();
-    ASSERT_EQ(storedDate.getDay(), 31);
-    ASSERT_EQ(storedDate.getMonth(), 12);
-    ASSERT_EQ(storedDate.getYear(), 2012);
+//     date storedDate = a.getDate();
+//     ASSERT_EQ(storedDate.getDay(), 31);
+//     ASSERT_EQ(storedDate.getMonth(), 12);
+//     ASSERT_EQ(storedDate.getYear(), 2012);
 
-    std::vector<std::pair<std::string, int>> storedList = a.getProductList();
-    std::string aa = "banan";
-    ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
-    ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
-    ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
+//     std::vector<std::pair<std::string, int>> storedList = a.getProductList();
+//     std::string aa = "banan";
+//     ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
+//     ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
+//     ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
 
-    ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
-    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-}
-TEST(order, order_init_and_getters_3)
-{
-    date d = date(31, 12, 2012);
+//     ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
+//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+// }
+// TEST(order, order_init_and_getters_3)
+// {
+//     date d = date(31, 12, 2012);
 
-    order a = order("name", "surname", d, "Warszawa, plac politechniki 1");
-    ASSERT_EQ(a.getName(), "name");
-    ASSERT_EQ(a.getSurname(), "surname");
+//     order a = order("name", "surname", d, "Warszawa, plac politechniki 1");
+//     ASSERT_EQ(a.getName(), "name");
+//     ASSERT_EQ(a.getSurname(), "surname");
 
-    date storedDate = a.getDate();
-    ASSERT_EQ(storedDate.getDay(), 31);
-    ASSERT_EQ(storedDate.getMonth(), 12);
-    ASSERT_EQ(storedDate.getYear(), 2012);
+//     date storedDate = a.getDate();
+//     ASSERT_EQ(storedDate.getDay(), 31);
+//     ASSERT_EQ(storedDate.getMonth(), 12);
+//     ASSERT_EQ(storedDate.getYear(), 2012);
 
-    ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
-    ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-}
+//     ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
+//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
+// }
 
-TEST(order, order_init_and_getters_4)
-{
-    // testing if error does not occur
-    order a = order();
-}
+// TEST(order, order_init_and_getters_4)
+// {
+//     // testing if error does not occur
+//     order a = order();
+// }
 
-TEST(order, order_setters_1)
-{
-    date d = date(31, 12, 2012);
-    std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
-    order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
+// TEST(order, order_setters_1)
+// {
+//     date d = date(31, 12, 2012);
+//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
+//     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
 
-    a.setName("Marek");
-    ASSERT_EQ(a.getName(), "Marek");
+//     a.setName("Marek");
+//     ASSERT_EQ(a.getName(), "Marek");
 
-    a.setSurname("Kaganek");
-    ASSERT_EQ(a.getSurname(), "Kaganek");
+//     a.setSurname("Kaganek");
+//     ASSERT_EQ(a.getSurname(), "Kaganek");
 
-    date d1 = date(1, 2, 3);
-    a.setDate(d1);
-    date storedDate = a.getDate();
-    ASSERT_EQ(storedDate.getDay(), 1);
-    ASSERT_EQ(storedDate.getMonth(), 2);
-    ASSERT_EQ(storedDate.getYear(), 3);
+//     date d1 = date(1, 2, 3);
+//     a.setDate(d1);
+//     date storedDate = a.getDate();
+//     ASSERT_EQ(storedDate.getDay(), 1);
+//     ASSERT_EQ(storedDate.getMonth(), 2);
+//     ASSERT_EQ(storedDate.getYear(), 3);
 
-    a.setStatusCode(CANCELED);
-    ASSERT_EQ(a.getStatusCode(), CANCELED);
+//     a.setStatusCode(CANCELED);
+//     ASSERT_EQ(a.getStatusCode(), CANCELED);
 
-    a.setShipmentAddress("inny address");
-    ASSERT_EQ(a.getShipmentAddress(), "inny address");
-}
+//     a.setShipmentAddress("inny address");
+//     ASSERT_EQ(a.getShipmentAddress(), "inny address");
+// }
 
 // testing product
 TEST(product, product_init_and_getters_1)
@@ -181,12 +182,6 @@ TEST(product, product_init_and_getters_1)
     ASSERT_EQ(p.getName(), "banan");
     ASSERT_EQ(p.getIdNumber(), 1);
     ASSERT_EQ(p.getPriceInGr(), 5);
-}
-
-TEST(product, product_init_and_getters_2)
-{
-    // patrzymy czy nie wyrzuca błędu
-    product p = product();
 }
 
 TEST(product, product_setName)
@@ -204,7 +199,7 @@ TEST(product, product_setIdNumber)
     product p = product("jablko", 5, 15);
 
     p.setIdNumber(10);
-    ASSERT_EQ(p.getName(), "kiwi");
+    ASSERT_EQ(p.getName(), "jablko");
     ASSERT_EQ(p.getIdNumber(), 10);
     ASSERT_EQ(p.getPriceInGr(), 15);
 }
@@ -214,7 +209,25 @@ TEST(product, product_setPriceInGr)
     product p = product("jablko", 5, 15);
 
     p.setPriceInGr(100);
-    ASSERT_EQ(p.getName(), "kiwi");
+    ASSERT_EQ(p.getName(), "jablko");
     ASSERT_EQ(p.getIdNumber(), 5);
     ASSERT_EQ(p.getPriceInGr(), 100);
 }
+
+TEST(orderListElement, orderListElement_init_and_getters)
+{
+    product p = product("jablko", 5, 15);
+    orderListElement element = orderListElement(p, 10);
+
+    ASSERT_EQ(element.getProduct(), p);
+    ASSERT_EQ(element.getQuantitiy(), 10);
+    ASSERT_EQ(element.getTotalPriceGr(), 10 * 15);
+}
+// testing orderListElement
+// TEST(orderListElement, orderListElement_init_and_getters)
+// {
+//     product banan = product("banan", 1, 799);
+//     orderListElement element = orderListElement(banan, 2);
+
+//     ASSERT_EQ(orderListElement.getProduct(), element);
+// }

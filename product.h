@@ -10,7 +10,6 @@ class product
 public:
     // constructors
     product(std::string name, unsigned int idNumber, unsigned int price);
-    product() = default;
 
     // getters and setters
     void setName(std::string name);

@@ -10,7 +10,7 @@ class order
     std::string name;
     std::string surname;
     date orderDate;
-    std::vector<orderListElement> productList = std::vector<orderListElement>(1);
+    std::vector<orderListElement> productList;
     orderStatus statusCode = ORDER_PLACED;
     std::string shipmentAddress;
 
@@ -30,13 +30,6 @@ public:
         std::string surname,
         date orderDate,
         std::vector<orderListElement> productList,
-        std::string shipmentAddress);
-
-    // minimum(should this be even accessible to users?)
-    order(
-        std::string name,
-        std::string surname,
-        date orderDate,
         std::string shipmentAddress);
 
     void setName(std::string newName);
