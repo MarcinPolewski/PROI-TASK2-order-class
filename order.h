@@ -51,5 +51,9 @@ public:
     void setShipmentAddress(address &shipmentAddress);
     const address &getShipmentAddress() const;
 
-    int findProduct(std::string productName); // returns index of procuct, -1 if product is not on the list
+    std::vector<orderListElement>::iterator findProduct(int productId);
+    void addListElement(orderListElement &newElement);
+    void removeProduct(int productId);
+    int getTotalPriceInGr();
+    int getTotalNumberOfProducts();
 };
