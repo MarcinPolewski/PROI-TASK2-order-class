@@ -129,7 +129,7 @@ void order::removeProduct(product productToRemove)
     removeProduct(productToRemove.getIdNumber());
 }
 
-int order::getTotalPriceInGr()
+unsigned int order::getTotalPriceInGr()
 {
     int sum = 0;
     for (auto it : productList)
@@ -138,7 +138,7 @@ int order::getTotalPriceInGr()
     }
     return sum;
 }
-int order::getTotalNumberOfProducts()
+unsigned int order::getTotalNumberOfProducts()
 {
     int counter = 0;
     for (auto it : productList)
