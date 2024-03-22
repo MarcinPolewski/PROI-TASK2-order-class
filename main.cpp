@@ -4,19 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    /*
-        pass values consequantly
-        name, surname, country, city, postal code, street, house number,
-        quantity of each product
-        1. banana
-        2. orange
-        3. yoghurt
-        4. bread
 
-        for instance:
-        Jorek Ogorek Poland Warsaw 12345 Nowowiejska 5
-        3 0 5 6
-    */
     if (argc != 12)
     {
         std::cout << "invalid number of argumets, proceed according to instruction:\n";
