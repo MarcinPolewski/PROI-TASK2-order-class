@@ -6,7 +6,7 @@
 date::date(unsigned int day, unsigned int month, unsigned int year)
 {
     if (day > 31 || month > 12)
-        throw std::invalid_argument("test");
+        throw std::invalid_argument("invalid date provided");
 
     this->day = day;
     this->month = month;
@@ -20,7 +20,7 @@ unsigned int date::getDay() const
 void date::setDay(unsigned int day)
 {
     if (day > 31)
-        throw std::invalid_argument("test");
+        throw std::invalid_argument("invalid date provided");
 
     this->day = day;
 }
@@ -32,7 +32,7 @@ unsigned int date::getMonth() const
 void date::setMonth(unsigned int month)
 {
     if (month > 12)
-        throw std::invalid_argument("test");
+        throw std::invalid_argument("invalid date provided");
 
     this->month = month;
 }
@@ -56,7 +56,7 @@ std::string date::getDateStr() const
 void date::setDate(unsigned int day, unsigned int month, unsigned int year)
 {
     if (day > 31 || month > 12)
-        throw std::invalid_argument("test");
+        throw std::invalid_argument("invalid date provoided");
 
     this->day = day;
     this->month = month;
