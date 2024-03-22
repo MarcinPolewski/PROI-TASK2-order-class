@@ -30,8 +30,8 @@ bool address::operator==(const address &another) const
     // there will be a difference
     return (houseNumber == another.getHouseNumber() &&
             postalCode == another.getPostalCode() &&
-            country.compare(another.getCountry()) &&
-            city.compare(another.getCity()) &&
+            country == another.getCountry() &&
+            city == another.getCity() &&
             postalCode == another.getPostalCode() &&
-            street.compare(another.getStreet()));
+            street == another.getStreet());
 }

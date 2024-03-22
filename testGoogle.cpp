@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
+
 #include "order.h"
 #include "date.h"
 #include "statusCodes.h"
 #include "product.h"
 #include "orderListElement.h"
+#include "address.h"
 
 // testing date class
 TEST(date, date_init_and_getters_1)
@@ -79,101 +81,6 @@ TEST(date, date_getDateStr)
     date a = date(31, 12, 2222);
     ASSERT_EQ(a.getDateStr(), "31.12.2222");
 }
-
-// testing order class
-// TEST(order, order_init_and_getters_1)
-// {
-//     date d = date(31, 12, 2012);
-//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
-
-//     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
-//     ASSERT_EQ(a.getName(), "name");
-//     ASSERT_EQ(a.getSurname(), "surname");
-
-//     date storedDate = a.getDate();
-//     ASSERT_EQ(storedDate.getDay(), 31);
-//     ASSERT_EQ(storedDate.getMonth(), 12);
-//     ASSERT_EQ(storedDate.getYear(), 2012);
-
-//     std::vector<std::pair<std::string, int>> storedList = a.getProductList();
-//     ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
-//     ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
-//     ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
-
-//     ASSERT_EQ(a.getStatusCode(), SENT);
-//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-// }
-// TEST(order, order_init_and_getters_2)
-// {
-//     date d = date(31, 12, 2012);
-//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
-
-//     order a = order("name", "surname", d, pl, "Warszawa, plac politechniki 1");
-//     ASSERT_EQ(a.getName(), "name");
-//     ASSERT_EQ(a.getSurname(), "surname");
-
-//     date storedDate = a.getDate();
-//     ASSERT_EQ(storedDate.getDay(), 31);
-//     ASSERT_EQ(storedDate.getMonth(), 12);
-//     ASSERT_EQ(storedDate.getYear(), 2012);
-
-//     std::vector<std::pair<std::string, int>> storedList = a.getProductList();
-//     std::string aa = "banan";
-//     ASSERT_EQ(storedList[0], std::make_pair("banan", 1));
-//     ASSERT_EQ(storedList[1], std::make_pair("gruszka", 2));
-//     ASSERT_EQ(storedList[2], std::make_pair("kiwi", 3));
-
-//     ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
-//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-// }
-// TEST(order, order_init_and_getters_3)
-// {
-//     date d = date(31, 12, 2012);
-
-//     order a = order("name", "surname", d, "Warszawa, plac politechniki 1");
-//     ASSERT_EQ(a.getName(), "name");
-//     ASSERT_EQ(a.getSurname(), "surname");
-
-//     date storedDate = a.getDate();
-//     ASSERT_EQ(storedDate.getDay(), 31);
-//     ASSERT_EQ(storedDate.getMonth(), 12);
-//     ASSERT_EQ(storedDate.getYear(), 2012);
-
-//     ASSERT_EQ(a.getStatusCode(), ORDER_PLACED);
-//     ASSERT_EQ(a.getShipmentAddress(), "Warszawa, plac politechniki 1");
-// }
-
-// TEST(order, order_init_and_getters_4)
-// {
-//     // testing if error does not occur
-//     order a = order();
-// }
-
-// TEST(order, order_setters_1)
-// {
-//     date d = date(31, 12, 2012);
-//     std::vector<std::pair<std::string, int>> pl = {{"banan", 1}, {"gruszka", 2}, {"kiwi", 3}};
-//     order a = order("name", "surname", d, pl, SENT, "Warszawa, plac politechniki 1");
-
-//     a.setName("Marek");
-//     ASSERT_EQ(a.getName(), "Marek");
-
-//     a.setSurname("Kaganek");
-//     ASSERT_EQ(a.getSurname(), "Kaganek");
-
-//     date d1 = date(1, 2, 3);
-//     a.setDate(d1);
-//     date storedDate = a.getDate();
-//     ASSERT_EQ(storedDate.getDay(), 1);
-//     ASSERT_EQ(storedDate.getMonth(), 2);
-//     ASSERT_EQ(storedDate.getYear(), 3);
-
-//     a.setStatusCode(CANCELED);
-//     ASSERT_EQ(a.getStatusCode(), CANCELED);
-
-//     a.setShipmentAddress("inny address");
-//     ASSERT_EQ(a.getShipmentAddress(), "inny address");
-// }
 
 // testing product
 TEST(product, product_init_and_getters_1)
@@ -269,3 +176,157 @@ TEST(orderListElement, orderListElement_setQuantity)
     element.setQuantity(555);
     ASSERT_EQ(element.getQuantitiy(), 555);
 }
+
+// testing address class
+TEST(address, address_init_and_getters)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(houseNumber, a.getHouseNumber());
+}
+
+TEST(address, address_set_city)
+{
+    std::string country = "Poland";
+    std::string city = "Bydoszcz";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    std::string newCity = "Warsaw";
+    a.setCity(newCity);
+
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(houseNumber, a.getHouseNumber());
+}
+
+TEST(address, address_set_country)
+{
+    std::string country = "Findland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    std::string newCountry = "Poland";
+    a.setCountry(newCountry);
+
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(houseNumber, a.getHouseNumber());
+}
+
+TEST(address, address_set_potal_code)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 54321;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    a.setPostalCode(12345);
+
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(houseNumber, a.getHouseNumber());
+}
+
+TEST(address, address_set_street)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Bukowa";
+    int houseNumber = 5;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    std::string newStreet = "Nowowiejska";
+    a.setStreet(newStreet);
+
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(houseNumber, a.getHouseNumber());
+}
+
+TEST(address, address_set_house_number)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 85;
+
+    address a = address(country, city, postalCode, street, houseNumber);
+    a.setHouseNumber(5);
+    ASSERT_EQ("Poland" == a.getCountry(), true);
+    ASSERT_EQ("Warsaw" == a.getCity(), true);
+    ASSERT_EQ(12345, a.getPostalCode());
+    ASSERT_EQ("Nowowiejska" == a.getStreet(), true);
+    ASSERT_EQ(5, a.getHouseNumber());
+}
+
+TEST(address, address_equals_operator_true)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a1 = address(country, city, postalCode, street, houseNumber);
+    address a2 = address(country, city, postalCode, street, houseNumber);
+    ASSERT_EQ(a1 == a2, true);
+}
+
+TEST(address, address_equals_operator_false)
+{
+    std::string country = "Poland";
+    std::string city = "Warsaw";
+    int postalCode = 12345;
+    std::string street = "Nowowiejska";
+    int houseNumber = 5;
+
+    address a1 = address(country, city, postalCode, street, houseNumber);
+    address a2 = address(country, city, postalCode, street, houseNumber);
+    std::string newStreet = "Sosnowa";
+    a2.setStreet(newStreet);
+
+    ASSERT_EQ(a1 == a2, false);
+}
+// testing order class
+// TEST(order, order_init_and_getters)
+// {
+//     date d = date(31, 12, 2030);
+//     product p1 = product("banan", 1, 399);
+//     product p2 = product("orange", 2, 499);
+//     product p3 = product("yoghurt", 3, 199);
+
+//     orderListElement element1 = orderListElement(p1, 5);
+//     orderListElement element2 = orderListElement(p2, 10);
+//     orderListElement element3 = orderListElement(p3, 15);
+
+//     std::string name = "Jorek";
+//     std::string surname = "Ogorek";
+
+// }
