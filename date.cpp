@@ -62,3 +62,8 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year)
     this->month = month;
     this->year = year;
 }
+
+bool date::operator==(const date &d) const
+{
+    return (d.getDay() == day && d.getMonth() == month && d.getYear() == year);
+}

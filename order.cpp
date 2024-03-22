@@ -7,7 +7,7 @@ order::order(
     date orderDate,
     std::vector<orderListElement> productList,
     orderStatus statusCode,
-    std::string shipmentAddress)
+    address shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
@@ -22,7 +22,7 @@ order::order(
     std::string surname,
     date orderDate,
     std::vector<orderListElement> productList,
-    std::string shipmentAddress)
+    address shipmentAddress)
 {
     this->name = name;
     this->surname = surname;
@@ -50,5 +50,5 @@ std::vector<orderListElement> &order::getProductList() { return productList; }
 void order::setStatusCode(orderStatus statusCode) { this->statusCode = statusCode; }
 orderStatus order::getStatusCode() const { return statusCode; }
 
-void order::setShipmentAddress(std::string shipmentAddress) { this->shipmentAddress = shipmentAddress; }
-std::string order::getShipmentAddress() const { return shipmentAddress; }
+void order::setShipmentAddress(address &shipmentAddress) { this->shipmentAddress = shipmentAddress; }
+const address &order::getShipmentAddress() const { return shipmentAddress; }

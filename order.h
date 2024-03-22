@@ -4,6 +4,7 @@
 #include "statusCodes.h"
 #include "date.h"
 #include "orderListElement.h"
+#include "address.h"
 
 class order
 {
@@ -12,7 +13,7 @@ class order
     date orderDate;
     std::vector<orderListElement> productList;
     orderStatus statusCode = orderStatus::ORDER_PLACED;
-    std::string shipmentAddress;
+    address shipmentAddress = address("a", "b", 1, "c", 1); // bez tego komilator krzyczy ze wartosc nie zainicjowana
 
 public:
     // full constructor
@@ -22,7 +23,7 @@ public:
         date orderDate,
         std::vector<orderListElement> productList,
         orderStatus statusCode,
-        std::string shipmentAddress);
+        address shipmentAddress);
 
     // default statusCode
     order(
@@ -30,7 +31,7 @@ public:
         std::string surname,
         date orderDate,
         std::vector<orderListElement> productList,
-        std::string shipmentAddress);
+        address shipmentAddress);
 
     void setName(std::string newName);
     std::string getName() const;
@@ -47,8 +48,8 @@ public:
     void setStatusCode(orderStatus statusCode);
     orderStatus getStatusCode() const;
 
-    void setShipmentAddress(std::string shipmentAddress);
-    std::string getShipmentAddress() const;
+    void setShipmentAddress(address &shipmentAddress);
+    const address &getShipmentAddress() const;
 
     int findProduct(std::string productName); // returns index of procuct, -1 if product is not on the list
 };

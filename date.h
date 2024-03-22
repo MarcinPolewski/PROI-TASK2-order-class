@@ -23,4 +23,6 @@ public:
     void setDate(unsigned int day, unsigned int month, unsigned int year);
 
     std::string getDateStr() const;
+
+    bool operator==(const date &d) const;
 };
