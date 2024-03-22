@@ -55,6 +55,7 @@ public:
     std::vector<orderListElement>::iterator findProduct(product seekedProduct);
     void addListElement(orderListElement &newElement);
     void removeProduct(int productId);
+    void removeProduct(product productToRemove);
     int getTotalPriceInGr();
     int getTotalNumberOfProducts();
 };

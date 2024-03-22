@@ -110,7 +110,18 @@ void order::addListElement(orderListElement &newElement)
 }
 void order::removeProduct(int productId)
 {
+    std::vector<orderListElement>::iterator foundElementIt = findProduct(productId);
+    if (foundElementIt != productList.end()) // if element was found, it's removed from the list
+    {
+        productList.erase(foundElementIt);
+    }
 }
+
+void order::removeProduct(product productToRemove)
+{
+    removeProduct(productToRemove.getIdNumber());
+}
+
 int order::getTotalPriceInGr()
 {
     int sum = 0;
