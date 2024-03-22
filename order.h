@@ -11,11 +11,11 @@ class order
     std::string surname;
     date orderDate;
     std::vector<orderListElement> productList;
-    orderStatus statusCode = ORDER_PLACED;
+    orderStatus statusCode = orderStatus::ORDER_PLACED;
     std::string shipmentAddress;
 
 public:
-    // full constructorf
+    // full constructor
     order(
         std::string name,
         std::string surname,
@@ -38,12 +38,12 @@ public:
     void setSurname(std::string newSurname);
     std::string getSurname() const;
 
-    void setDate(date orderDate);
-    date getDate() const;
+    void setDate(date &orderDate);
+    const date &getDate() const;
 
     void setProductList(std::vector<orderListElement> &productList);
-    std::vector<orderListElement> &getProductList();
-
+    std::vector<orderListElement> &getProductList(); // returning reference, so list can be modified
+                                                     // easily somewhere else
     void setStatusCode(orderStatus statusCode);
     orderStatus getStatusCode() const;
 

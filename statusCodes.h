@@ -1,6 +1,6 @@
 #pragma once
 
-enum orderStatus
+enum class orderStatus
 {
     ORDER_PLACED,
     PACKING,
