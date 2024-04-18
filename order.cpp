@@ -1,4 +1,5 @@
 #include "order.h"
+#include <algorithm>
 
 // constructors
 order::order(

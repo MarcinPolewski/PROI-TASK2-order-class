@@ -1,5 +1,3 @@
-#pragma once
-
 #include "date.h"
 #include <stdexcept>
 

@@ -12,9 +12,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-set(PROJECT_SOURCES order.cpp order.h date.h date.cpp statusCodes.h product.h product.cpp orderListElement.h orderListElement.cpp address.h address.cpp main.cpp)
+# for using main:
+# set(PROJECT_SOURCES order.cpp order.h date.h date.cpp statusCodes.h product.h product.cpp orderListElement.h orderListElement.cpp address.h address.cpp main.cpp)
+# add_executable(main main.cpp  ${PROJECT_SOURCES} )
 
-add_executable(order order.cpp  ${PROJECT_SOURCES} )
-
+#for google test:
+set(PROJECT_SOURCES order.cpp order.h date.h date.cpp statusCodes.h product.h product.cpp orderListElement.h orderListElement.cpp address.h address.cpp)
 add_executable(testGoogle testGoogle.cpp ${PROJECT_SOURCES})
 target_link_libraries(testGoogle PUBLIC gtest_main)

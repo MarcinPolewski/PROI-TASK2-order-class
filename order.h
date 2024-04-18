@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
 #include "statusCodes.h"
 #include "date.h"
 #include "orderListElement.h"
